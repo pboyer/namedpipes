@@ -1,12 +1,14 @@
+To run the demo, first install go. Then:
+
+```./run.sh```
+
+### How it works
+
 There are three executables found in the `cmd` directory:
 
 * master
 * reader
 * writer
-
-Use `./run.sh` to run the demo.
-
-### How it works
 
 `master` creates one `writer` child process and n `reader` child processes. For each child, `stdout` and `stderr` are piped to `master`'s `stdout` for visibility.
 
