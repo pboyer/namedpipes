@@ -8,7 +8,7 @@ Use `./run.sh` to run the demo.
 
 ### How it works
 
-`master` creates one `writer` child process and n `reader` child processes. For each child, `stdout` and `stderr` are piped to `master`'s stdout for visibility.
+`master` creates one `writer` child process and n `reader` child processes. For each child, `stdout` and `stderr` are piped to `master`'s `stdout` for visibility.
 
 In addition to the child processes, `master` also creates n named pipes, one for each `reader`, using the `mkfifo` system call.
 
