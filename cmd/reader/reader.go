@@ -22,14 +22,14 @@ func main() {
 
 	go func() {
 		<-signalCh
-		fmt.Printf("ReaderSIGTERM @ %d. Exiting...\n", pid)
+		fmt.Printf("ReaderSIGTERM @ %d. Good bye!\n", pid)
 		os.Exit(0)
 	}()
 
 	pipe, _ := os.OpenFile(namedPipe, os.O_RDONLY, 0600)
 
 	// buffer to read input
-	buf := make([]byte, 5)
+	buf := make([]byte, 20)
 	for {
 		n, err := pipe.Read(buf)
 

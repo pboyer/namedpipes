@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+	"time"
 )
 
 func main() {
@@ -22,7 +23,7 @@ func main() {
 
 	go func() {
 		<-signalCh
-		fmt.Printf("WriterSIGTERM @ %d. Exiting...\n", pid)
+		fmt.Printf("WriterSIGTERM @ %d. Good bye!\n", pid)
 		os.Exit(0)
 	}()
 
@@ -42,13 +43,14 @@ func main() {
 	wg.Add(len(pipes))
 	for _, fd := range pipes {
 		go func(fd *os.File) {
-			// write n hello worlds
-			for i := 0; i < 5; i++ {
-				_, err := fd.WriteString("hello world")
+			// writes 10 integers to fd
+			for i := 0; i < 10; i++ {
+				_, err := fmt.Fprintf(fd, "%d ", i)
 				if err != nil {
 					fmt.Printf("WriterErr @ %d: %v\n", pid, err)
 					os.Exit(1)
 				}
+				time.Sleep(100 * time.Millisecond) // deliberately wait 100ms so you can see what's happening
 			}
 			wg.Done()
 			fd.Close()
